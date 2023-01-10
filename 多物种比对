@@ -1,0 +1,3 @@
+把全基因组fasta序列下载好
+makeblastdb -in 序列的名字 -db nucl/prot (核酸是nucl，蛋白是prot) -out 给这个数据库起个名字
+blastn -query -db 数据库的名字 -outfmt 6 (一般用6或者9）
