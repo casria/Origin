@@ -1,0 +1,507 @@
+# 栽培稻单倍型分类脚本。保存为html格式打开
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.1/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.1/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    var data = [
+    {
+    name: 'admix',
+    itemStyle: {
+      color: '#CAD3C8'
+    },
+    children: [
+      {
+        name: '---',
+        value: 40,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 2,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 3,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 4,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+  {
+    name: 'GJ-adm',
+    itemStyle: {
+      color: '#9db2b7'
+    },
+    children: [
+      {
+        name: '---',
+        value: 75,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 1,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 1,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 1,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+  {
+    name: 'japonica',
+    itemStyle: {
+      color: '#0aa3b5'
+    },
+    children: [
+      {
+        name: '---',
+        value: 939,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 0,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 41,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 9,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+  {
+    name: 'indica',
+    itemStyle: {
+      color: '#e0719c',
+    },
+    children: [
+      {
+        name: '---',
+        value: 84,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 394,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 266,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 199,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ],
+  },
+  {
+    name: 'XI-adm',
+    itemStyle: {
+      color: '#D6A2E8'
+    },
+    children: [
+      {
+        name: '---',
+        value: 34,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 140,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 142,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 42,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+  {
+    name: 'cA(Aus)',
+    itemStyle: {
+      color: '#ffda79'
+    },
+    children: [
+      {
+        name: '---',
+        value: 8,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 10,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 20,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 9,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+    {
+    name: 'glaberrima',
+    itemStyle: {
+      color: '#d35400'
+    },
+    children: [
+      {
+        name: '---',
+        value: 0,
+        itemStyle: {
+      color: '#0aa3b5'
+    },
+      },
+      {
+        name: '+++',
+        value: 0,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '++d-',
+        value: 119,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 4,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ],
+    sort: "asc",
+  },
+  {
+    name: 'cB(Bas)',
+    itemStyle: {
+      color: '#182C61'
+    },
+    children: [
+      {
+        name: '---',
+        value: 3,
+        itemStyle: {
+      color: '#34ace0'
+    },
+      },
+      {
+        name: '+++',
+        value: 65,
+        itemStyle: {
+      color: '#ad213e'
+    },
+      },
+      {
+        name: '++d-',
+        value: 0,
+        itemStyle: {
+      color: '#e62969'
+    },
+      },
+      {
+        name: '++-',
+        value: 0,
+        itemStyle: {
+      color: '#c94930'
+    },
+      },
+    ]
+  },
+];
+option = {
+  series: {
+    type: 'sunburst',
+    sort: undefined,
+    emphasis: {
+         focus: 'ancestor'
+     },
+    data: data,
+    radius: [0, '90%'],
+    label: {
+      rotate: 'radial',
+      show:false
+    },
+  }
+};
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
+
+# 籼粳地图柱形图
+<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>ECharts</title>
+        <script src="echarts.js"></script>
+      </head>
+      <body>
+        <div id="main" style="width: 600px;height:400px;"></div>
+        <script type="text/javascript">
+          var myChart = echarts.init(document.getElementById('main'));
+          option = {
+        legend: {
+          show:false
+        },
+        xAxis: {
+          show:true,
+          axisLine: {
+            lineStyle: {
+              color: "#000300",
+              width:1.5,
+              type:'solid',
+            }
+          },
+          axisTick: {
+            show:false,
+            alignWithLabel: true
+          },
+          axisLabel:{
+            show:false,
+            color:'#000300',
+            fontStyle:'italic',
+            fontFamily:'Arial',
+            fontSize:18,
+            fontWeight:'bold'
+          },
+          type: 'category',
+          data: ['indica', 'japonica'],
+        },
+        yAxis: {
+          show:false,
+          max:100,
+          axisLine: {
+            show:true,
+            lineStyle: {
+              color: "#000300",
+              width:1.5,
+              type:'solid',
+            }
+          },
+          axisLabel:{
+            color:'#000300',
+            fontStyle:'normal',
+            fontFamily:'Arial',
+            fontSize:18,
+            fontWeight:'bold'
+          },
+          axisTick: {
+            show:true,
+            alignWithLabel: true
+          },
+          splitLine:{show:false},
+          type: 'value'  },
+        series: [
+          {
+            name: '---',
+            type: 'bar',
+            stack: 'total',
+            barWidth: "85%",
+            label: {
+              show: false,
+              fontSize:15,
+              color:'#000300',
+              fontWeight:'bold'
+            },
+            itemStyle: {
+            borderWidth: 0,
+            borderColor: '#020203',
+            color:'#054FFE'
+          },
+
+            emphasis: {
+              focus: 'series'
+            },
+            data: [3, 71],
+            barCategoryGap: "30%"
+          },
+          {
+            name: '+++',
+            type: 'bar',
+            stack: 'total',
+            label: {
+              show: false,
+              fontSize:15,
+              color:'#000300',
+              fontWeight:'bold'
+            },
+            itemStyle: {
+            borderWidth: 0,
+            borderColor: '#030100',
+            color:'#FF2B1B'
+          },
+
+            emphasis: {
+              focus: 'series'
+            },
+            data: [19, 0]
+          },
+          {
+            name: '++-',
+            type: 'bar',
+            stack: 'total',
+            label: {
+              show: false,
+              fontSize:15,
+              color:'#000300',
+              fontWeight:'bold'
+            },
+            itemStyle: {
+            borderWidth: 0,
+            borderColor: '#020203',
+            color:'#FF7E70'
+          },
+            emphasis: {
+              focus: 'series'
+            },
+            data: [12, 0]
+          },
+          {
+            name: '++d-',
+            type: 'bar',
+            stack: 'total',
+            label: {
+              show: false,
+              fontSize:15,
+              color:'#000300',
+              fontWeight:'bold'
+            },
+            itemStyle: {
+            borderWidth: 0,
+            borderColor: '#020203',
+            color:'#FF9FC3'
+          },
+            emphasis: {
+              focus: 'series'
+            },
+            data: [25,1]
+          }
+        ]
+      };
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
